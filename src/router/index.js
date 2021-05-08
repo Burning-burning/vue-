@@ -2,8 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
-
-const routes = []
+const Login = () => import('../views/Login.vue')
+const routes = [
+  {
+    path: '/login',
+    component: Login
+  }
+]
 
 const router = new VueRouter({
   mode: 'history',
