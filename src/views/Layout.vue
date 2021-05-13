@@ -51,6 +51,7 @@ export default {
     } else {
       const res = await getOne(loginId)
       this.setAdmin(res)
+      localStorage.setItem('roleId', res.roleId)
     }
   }
 }

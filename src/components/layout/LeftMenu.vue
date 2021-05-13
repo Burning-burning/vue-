@@ -15,7 +15,11 @@
           <i class="el-icon-user"></i>
           <span>账号管理</span>
         </template>
-        <el-menu-item index="/layout/role">角色管理</el-menu-item>
+        <el-menu-item
+          v-if="$store.state.admin.admin.roleId === 1"
+          index="/layout/role"
+          >角色管理</el-menu-item
+        >
         <el-menu-item index="/layout/admin">账号管理</el-menu-item>
       </el-submenu>
       <el-submenu index="2">
@@ -23,7 +27,11 @@
           <i class="el-icon-office-building"></i>
           <span>客房管理</span>
         </template>
-        <el-menu-item index="/layout/roomType">类型管理</el-menu-item>
+        <el-menu-item
+          index="/layout/roomType"
+          v-if="$store.state.admin.admin.roleId === 1"
+          >类型管理</el-menu-item
+        >
         <el-menu-item index="/layout/room">客房管理</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
@@ -38,7 +46,11 @@
           <i class="el-icon-setting"></i>
           <span>权限管理</span>
         </template>
-        <el-menu-item index="4-1">权限管理</el-menu-item>
+        <el-menu-item
+          index="/layout/right"
+          v-if="$store.state.admin.admin.roleId === 1"
+          >权限管理</el-menu-item
+        >
       </el-submenu>
     </el-menu>
   </div>

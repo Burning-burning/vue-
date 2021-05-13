@@ -18,6 +18,7 @@ const Message = () => import('../views/user/Message')
 const ResetPwd = () => import('../views/user/ResetPwd')
 const Room = () => import('../views/room/Room.vue')
 const Guest = () => import('../views/guest/Guest.vue')
+const Right = () => import('../views/rights/Right.vue')
 const routes = [
   {
     path: '/',
@@ -61,7 +62,7 @@ const routes = [
       },
       {
         path: 'role',
-        meta: { title: '角色管理' },
+        meta: { title: '角色管理', permission: [1] },
         component: Role
       },
       {
@@ -71,7 +72,7 @@ const routes = [
       },
       {
         path: 'roomType',
-        meta: { title: '客房类型管理' },
+        meta: { title: '客房类型管理', permission: [1] },
         component: RoomType
       },
       {
@@ -83,6 +84,11 @@ const routes = [
         path: 'guest',
         meta: { title: '顾客管理' },
         component: Guest
+      },
+      {
+        path: 'right',
+        meta: { title: '权限管理', permission: [1] },
+        component: Right
       }
     ]
   },
@@ -103,6 +109,15 @@ router.beforeEach((to, from, next) => {
   NProgress.start()
   if (to.meta && to.meta.title) {
     document.title = to.meta.title
+  }
+  if (to.meta && to.meta.permission) {
+    if (to.meta.permission.includes(parseInt(localStorage.getItem('roleId')))) {
+      next()
+    } else {
+      router.push('/layout')
+    }
+  } else {
+    next()
   }
   next()
 })
